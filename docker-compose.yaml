@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  flask:
+    build:
+      context: flask/
+      dockerfile: ../docker/flask/Dockerfile
+
+  db:
+    image: mysql:latest
+    volumes:
+      - "./.docker_data/db:/var/lib/mysql"
+    ports:
+      - "33070:33060"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ~
+      MYSQL_DATABASE: game
+      MYSQL_USER: user
+      MYSQL_PASSWORD: passwort
