@@ -15,6 +15,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ~
-      MYSQL_DATABASE: game
+      MYSQL_DATABASE: database
       MYSQL_USER: user
-      MYSQL_PASSWORD: passwort
+      MYSQL_PASSWORD: password
