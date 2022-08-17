@@ -1,8 +1,8 @@
 import sqlite3
 import datetime
 from random import randrange
-from game import Game
-from guess import Guess
+from .game import Game
+from .guess import Guess
 
 con = sqlite3.connect('scores.db', detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
 

@@ -5,27 +5,32 @@ app = Flask(__name__)
 database.init()
 
 @app.route('/')
-def newGame():
-    return render_template('NewGame.html')
+def requestName():
+    return render_template('RequestName.html')
 
 @app.route('/game')
-def game(game_id = None, name = None):
-    try:
-        game = database.getGameById(
-            game_id
-        )
-    except:
-        try:
-            game = database.createGame(
-                name
-            )
-        except:
-            return new_game()
+def game(game_id = None):
+    game = database.getGameById(
+        game_id
+    )
 
     if game is None:
         return new_game()
 
     return render_template('Game.html', game = game)
+
+@app.route('/start', methods = ['POST'])
+def startGame():
+    try:
+        name = request.form['name']
+    except:
+        return new_game()
+
+    game = database.createGame(name)
+    if game is None:
+        return new_game()
+
+    return redirect(url_for('game', game_id = game.id))
 
 @app.route('/guess')
 def makeGuess(game_id = None, guessed_number = None):
@@ -59,7 +64,7 @@ def correctGuess(game_id = None):
     )
 
 def new_game():
-    return redirect(url_for('newGame'))
+    return redirect(url_for('requestName'))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
