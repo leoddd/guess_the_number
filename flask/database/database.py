@@ -15,14 +15,14 @@ def init():
 
 def getHighestScores(amount):
     pass
-    
+
 def getGamesOfPlayer(playerName):
     pass
-    
+
 def createGame(name):
     pass
-    
-def addGuess(gameId, guess):
+
+def addGuess(game, guess):
     pass
 
 def cleanup():
