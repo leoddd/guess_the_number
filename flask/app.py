@@ -9,7 +9,9 @@ def requestName():
     return render_template('RequestName.html')
 
 @app.route('/game')
-def game(game_id = None):
+def game():
+    game_id = request.args.get('game_id', None, int)
+
     game = database.getGameById(
         game_id
     )
@@ -21,9 +23,8 @@ def game(game_id = None):
 
 @app.route('/start', methods = ['POST'])
 def startGame():
-    try:
-        name = request.form['name']
-    except:
+    name = request.form.get('name', None, str)
+    if name is None:
         return new_game()
 
     game = database.createGame(name)
@@ -33,7 +34,10 @@ def startGame():
     return redirect(url_for('game', game_id = game.id))
 
 @app.route('/guess')
-def makeGuess(game_id = None, guessed_number = None):
+def makeGuess():
+    game_id = request.args.get('game_id', None, int)
+    guessed_number = request.args.get('guessed_number', None, int)
+
     if game_id is None or guessed_number is None:
         return new_game()
 
@@ -49,7 +53,9 @@ def makeGuess(game_id = None, guessed_number = None):
     return redirect(url_for('correctGuess', game_id = game.id))
 
 @app.route('/gg')
-def correctGuess(game_id = None):
+def correctGuess():
+    game_id = request.args.get('game_id', None, int)
+
     if game_id is None:
         return new_game()
 
@@ -67,5 +73,5 @@ def new_game():
     return redirect(url_for('requestName'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug = True, host = '0.0.0.0')
     database.cleanup()
