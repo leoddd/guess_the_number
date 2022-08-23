@@ -182,16 +182,16 @@ def runTests():
     print("###   Highscores   ###")
     highScores = getHighestScores(4)
     for game in highScores:
-        print(game.toString())
+        print(str(game))
 
     print("###   Mantis Games   ###")
     mantisScores = getGamesOfPlayer("Mantis")
     for game in mantisScores:
-        print(game.toString())
+        print(str(game))
 
     print("###   Rocket Game   ###")
     rocketGameScore = getGameById(rocketGame.id)
-    print(rocketGameScore.toString())
+    print(str(rocketGameScore))
 
 if __name__ == "__main__":
     init(clear=True)
