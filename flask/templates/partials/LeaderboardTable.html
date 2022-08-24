@@ -3,10 +3,16 @@
         <tr>
             <th></th>
             <th>
+                Lösung
+            </th>
+            <th>
                 Name
             </th>
             <th>
                 Versuche
+            </th>
+            <th>
+                Geratene Zahlen
             </th>
         </tr>
     </thead>
@@ -25,10 +31,16 @@
                     #{{ loop.index }}
                 </td>
                 <td>
+                    {{ leaderboard_game.correctGuess }}
+                </td>
+                <td>
                     {{ leaderboard_game.name }}
                 </td>
                 <td>
                     {{ leaderboard_game.guesses|length }}
+                </td>
+                <td>
+                    {% for guess in leaderboard_game.guesses|sort(attribute="guess") %}{{ guess.guess }}{% if not loop.last %}, {% endif %}{% endfor %}
                 </td>
             </tr>
         {% endfor %}
