@@ -8,5 +8,4 @@ class Guess:
         self.guess = guess
 
     def __str__(self):
-        return 'test'
         return "[Guess -> id: " + str(self.id) + ", gameId: " + str(self.gameId) + ", date: " + self.date.strftime("%m/%d/%Y, %H:%M:%S") + ", guess: " + str(self.guess) + "]"
