@@ -8,7 +8,26 @@
 
 {% block body %}
 
-    wrong lol
-    {{ game }}
+    wrong lol {{ game }}<br />
+    <br />
+    {% if game.guesses|length > 0 %}
+
+        {{ (game.guesses|last).guess }} ist
+        {% if game.correctGuess > (game.guesses|last).guess %}
+            zu klein
+        {% else %}
+            zu groß
+        {% endif %}
+
+    {% else %}
+        keine zahl geraten
+    {% endif %}
+    <br />
+    <br />
+    bitte zahl zwischen 1-100 raten:<br />
+    <form action="guess" method="POST">
+        <input type="hidden" name="game_id" value="{{ game.id }}" />
+        <input type="text" name="guessed_number" pattern="^0*(?:[1-9][0-9]?|100)$" />
+    </form>
 
 {% endblock %}

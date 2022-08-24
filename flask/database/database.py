@@ -89,6 +89,7 @@ def getGameById(id):
 
         guesses = []
         for row in records:
+            print(row)
             guessId = row[0]
             guessDate = row[1]
             guessNumber = row[2]
@@ -99,7 +100,7 @@ def getGameById(id):
 def createGame(name):
     cur = con.cursor()
     sqlite_insert_with_param = """INSERT INTO 'games'('name', 'correctGuess')VALUES (?, ?);"""
-    correctGuess = randrange(0,101)
+    correctGuess = randrange(1,101)
     data_tuple = (name, correctGuess)
     cur.execute(sqlite_insert_with_param, data_tuple)
     con.commit()

@@ -36,10 +36,10 @@ def startGame():
 
     return redirect(url_for('game', game_id = game.id))
 
-@app.route('/guess')
+@app.route('/guess', methods = ['POST'])
 def makeGuess():
-    game_id = request.args.get('game_id', None, int)
-    guessed_number = request.args.get('guessed_number', None, int)
+    game_id = request.form.get('game_id', None, int)
+    guessed_number = request.form.get('guessed_number', None, int)
 
     if game_id is None or guessed_number is None:
         return new_game()
