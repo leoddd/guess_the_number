@@ -18,11 +18,18 @@ def game():
 
     if game is None:
         return new_game()
-        
+
     if game.is_won():
         return redirect(url_for('correctGuess', **request.args))
 
     return render_template('Game.html', game = game)
+
+@app.route('/leaderboard')
+def leaderboard():
+    return render_template(
+        'Leaderboard.html',
+        leaderboard = database.getHighestScores(10)
+    )
 
 @app.route('/start', methods = ['POST'])
 def startGame():
@@ -65,7 +72,7 @@ def correctGuess():
     game = database.getGameById(game_id)
     if game is None:
         return new_game()
-        
+
     if not game.is_won():
         return redirect(url_for('game', **request.args))
 

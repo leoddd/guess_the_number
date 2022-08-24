@@ -89,7 +89,6 @@ def getGameById(id):
 
         guesses = []
         for row in records:
-            print(row)
             guessId = row[0]
             guessDate = row[1]
             guessNumber = row[2]

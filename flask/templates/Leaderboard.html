@@ -1,0 +1,20 @@
+{% extends "Base.html" %}
+
+{% block head %}
+
+    <title>Zahlen Raten: Bestenliste</title>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="text-center">
+        <h1 class="mb-3">Bestenliste</h1>
+        <p>
+            Hier findest du eine Liste der 50 schnellsten Spiele:
+        </p>
+    </div>
+
+    {% include 'partials/LeaderboardTable.html' %}
+
+{% endblock %}

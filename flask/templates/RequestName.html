@@ -8,9 +8,18 @@
 
 {% block body %}
 
-    name bitte:
-    <form action="start" method="POST">
-        <input type="text" name="name" />
-    </form>
+    <div class="text-center">
+        <h1 class="mb-3">Neues Spiel</h1>
+    </div>
+
+    <div>
+        <label for="form_name">
+            Gib bitte deinen Namen ein um ein neues Spiel zu starten:
+        </label>
+        <form action="start" method="POST">
+            <input type="text" class="form-control mb-2" name="name" id="form_name" placeholder="Name" />
+            <input type="submit" class="btn btn-primary" value="Absenden" />
+        </form>
+    </div>
 
 {% endblock %}

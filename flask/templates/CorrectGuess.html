@@ -8,8 +8,22 @@
 
 {% block body %}
 
-    correct woo
-    {{ game }}
-    {{ leaderboard }}
+<div class="text-center">
+    <h1 class="mb-2">
+        Korrekt!
+    </h1>
+    <h2 class="mb-3">
+        {{ (game.guesses|last).guess }} ist richtig!
+    </h2>
+    <p class="mt-4">
+        Du hast <b>{{ game.guesses|length }}</b> Versuche benötigt.
+        {% if game is in(leaderboard) %}
+            <br />
+            Damit bist du Platz #{{ leaderboard.index(game) + 1 }} auf der Bestenliste!
+        {% endif %}
+    </p>
+</div>
+
+{% include 'partials/LeaderboardTable.html' %}
 
 {% endblock %}

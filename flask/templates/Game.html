@@ -8,26 +8,34 @@
 
 {% block body %}
 
-    wrong lol {{ game }}<br />
-    <br />
     {% if game.guesses|length > 0 %}
 
-        {{ (game.guesses|last).guess }} ist
-        {% if game.correctGuess > (game.guesses|last).guess %}
-            zu klein
-        {% else %}
-            zu groß
-        {% endif %}
+        <h1 class="mb-3">
+            Nicht richtig! :(
+        </h1>
+        <p>
+            <b>{{ (game.guesses|last).guess }}</b> ist
+            {% if game.correctGuess > (game.guesses|last).guess %}
+                zu klein!
+            {% else %}
+                zu groß!
+            {% endif %}
+        </p>
 
     {% else %}
-        keine zahl geraten
+
+        <h1 class="mb-3">
+            Hallo {{ game.name }}!
+        </h1>
+
     {% endif %}
-    <br />
-    <br />
-    bitte zahl zwischen 1-100 raten:<br />
-    <form action="guess" method="POST">
-        <input type="hidden" name="game_id" value="{{ game.id }}" />
-        <input type="text" name="guessed_number" pattern="^0*(?:[1-9][0-9]?|100)$" />
-    </form>
+
+    <div>
+        Rate bitte eine Zahl zwischen 1-100:<br />
+        <form action="guess" method="POST">
+            <input type="hidden" name="game_id" value="{{ game.id }}" />
+            <input type="text" name="guessed_number" pattern="^0*(?:[1-9][0-9]?|100)$" />
+        </form>
+    </div>
 
 {% endblock %}

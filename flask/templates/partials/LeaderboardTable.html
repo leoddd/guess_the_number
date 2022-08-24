@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Name
+            </th>
+            <th>
+                Versuche
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for leaderboard_game in leaderboard %}
+            <tr>
+                <td>
+                    #{{ loop.index }}
+                </td>
+                <td>
+                    {{ leaderboard_game.name }}
+                </td>
+                <td>
+                    {{ leaderboard_game.guesses|length }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
