@@ -31,6 +31,13 @@ def leaderboard():
         leaderboard = database.getHighestScores(10)
     )
 
+@app.route('/running')
+def runningGames():
+    return render_template(
+        'RunningGames.html',
+        running_games = database.getRunningGames()
+    )
+
 @app.route('/start', methods = ['POST'])
 def startGame():
     name = request.form.get('name', None, str)
