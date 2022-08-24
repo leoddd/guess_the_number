@@ -1,7 +1,5 @@
-TODO: PROPERLY STYLE THIS
-
-<table>
-    <thead>
+<table class="table table-striped mt-5">
+    <thead class="table-dark">
         <tr>
             <th></th>
             <th>
@@ -12,9 +10,17 @@ TODO: PROPERLY STYLE THIS
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         {% for leaderboard_game in leaderboard %}
-            <tr>
+            {% if loop.index == 1 %}
+                <tr class="table-gold">
+            {% elif loop.index == 2 %}
+                <tr class="table-silver">
+            {% elif loop.index == 3 %}
+                <tr class="table-bronze">
+            {% else %}
+                <tr>
+            {% endif %}
                 <td>
                     #{{ loop.index }}
                 </td>

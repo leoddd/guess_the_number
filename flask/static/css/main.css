@@ -16,7 +16,35 @@ footer {
 }
 
 
-.navbar-brand {
+.bg-less-than {
+    background: rgb(251, 252, 255);
+    border-bottom-left-radius: 6px;
+}
+
+.bg-greater-than {
+    background: rgb(255, 248, 243);
+    border-bottom-right-radius: 6px;
+}
+
+.navbar-brand-title, .navbar-brand-subtitle {
     font-family: monospace;
     font-weight: bold;
+    letter-spacing: -0.8px;
+    word-spacing: -4px;
+}
+.navbar-brand-subtitle {
+    font-size: .78rem;
+}
+
+.table-gold {
+    background: linear-gradient(to bottom, #fadead, #eed48f);
+    border-color: #bb942a;
+}
+.table-silver {
+    background: linear-gradient(to bottom, #d3d3d3, #bdbdbd);
+    border-color: #808080;
+}
+.table-bronze {
+    background: linear-gradient(to bottom, #facc9d, #e9ad71);
+    border-color: #b87634;
 }

@@ -51,4 +51,42 @@
         </form>
     </div>
 
+    {% if game.guesses|length > 0 %}
+        <div class="m-auto card text-center mt-5">
+            <div class="card-header">
+                Bisher geratene Zahlen
+            </div>
+            <div class="card-body p-0">
+                <div class="row mx-0">
+
+                    <div class="col-6 border-end bg-less-than p-0 pb-2">
+                        <div class="border-bottom mb-2 pt-2" style="background: rgba(0, 0, 0, .05);">
+                            <h3 class="mb-2" style="font-size: 1.1rem;">Zu Klein <</h3>
+                        </div>
+                        {% if game.guesses|selectattr("guess", "lt", game.correctGuess)|list|length > 0 %}
+                            {% for guess in game.guesses|selectattr("guess", "lt", game.correctGuess)|sort(attribute="guess") %}
+                                {{ guess.guess }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                    <div class="col-6 bg-greater-than p-0 pb-2">
+                        <div class="border-bottom mb-2 pt-2" style="background: rgba(0, 0, 0, .05);">
+                            <h3 class="mb-2" style="font-size: 1.1rem;">> Zu Groß</h3>
+                        </div>
+                        {% if game.guesses|selectattr("guess", "gt", game.correctGuess)|list|length > 0 %}
+                            {% for guess in game.guesses|selectattr("guess", "gt", game.correctGuess)|sort(attribute="guess") %}
+                                {{ guess.guess }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}

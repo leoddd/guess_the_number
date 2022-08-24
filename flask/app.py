@@ -35,7 +35,7 @@ def leaderboard():
 def runningGames():
     return render_template(
         'RunningGames.html',
-        running_games = database.getRunningGames()
+        running_games = database.getUnfinishedGames()
     )
 
 @app.route('/start', methods = ['POST'])

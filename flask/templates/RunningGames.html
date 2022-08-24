@@ -32,7 +32,17 @@
 
     {% if running_games|length > 0 %}
 
-        TODO: RUNNING GAME LIST HERE
+        <div class="list-group">
+            {% for game in running_games %}
+                <a href="/game?game_id={{ game.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ game.name }}</div>
+                        <div class="text-muted">#{{ game.id }}</div>
+                    </div>
+                    <span class="badge bg-dark rounded-pill">{{ game.guesses|length }} Versuch{% if game.guesses|length != 1 %}e{% endif %}</span>
+                </a>
+            {% endfor %}
+        </div>
 
     {% endif %}
 

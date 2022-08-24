@@ -42,7 +42,7 @@ def getHighestScores(amount):
         games.append(Game(gameId, name, correctGuess, guesses))
 
     return games
-    
+
 def getUnfinishedGames():
     cur = con.cursor()
     sqlite_select_game_with_param = """SELECT ga.id, ga.name, ga.correctGuess from games ga WHERE ga.correctGuess NOT IN (SELECT gu.guess FROM guesses gu WHERE gu.gameId == ga.id)"""
