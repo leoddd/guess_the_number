@@ -1,0 +1,39 @@
+{% extends "Base.html" %}
+
+{% block head %}
+
+    <title>Zahlen Raten: Laufende Spiele</title>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="text-center mb-5" style="min-height: 120px;">
+
+        <h1 class="mb-3">
+            Laufende Spiele
+        </h1>
+
+        {% if running_games|length > 0 %}
+
+            <h2>
+                Derzeit laufen {{ running_games|length }} unfertige Spiele:
+            </h2>
+
+        {% else %}
+
+            <h2>
+                Derzeit laufen keine Spiele. Starte hier ein neues:
+            </h2>
+            <a href="/" class="btn btn-primary">Neues Spiel</a>
+
+        {% endif %}
+    </div>
+
+    {% if running_games|length > 0 %}
+
+        TODO: RUNNING GAME LIST HERE
+
+    {% endif %}
+
+{% endblock %}

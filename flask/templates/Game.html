@@ -8,33 +8,46 @@
 
 {% block body %}
 
-    {% if game.guesses|length > 0 %}
+    <div class="text-center mb-5" style="min-height: 120px;">
+        {% if game.guesses|length > 0 %}
 
-        <h1 class="mb-3">
-            Nicht richtig! :(
-        </h1>
-        <p>
-            <b>{{ (game.guesses|last).guess }}</b> ist
-            {% if game.correctGuess > (game.guesses|last).guess %}
-                zu klein!
-            {% else %}
-                zu groß!
-            {% endif %}
-        </p>
+            <h1 class="mb-3">
+                Nicht richtig! :(
+            </h1>
+            <h2>
+                <b>{{ (game.guesses|last).guess }}</b> ist
+                {% if game.correctGuess > (game.guesses|last).guess %}
+                    zu klein!
+                {% else %}
+                    zu groß!
+                {% endif %}
+            </h2>
 
-    {% else %}
+        {% else %}
 
-        <h1 class="mb-3">
-            Hallo {{ game.name }}!
-        </h1>
+            <h1>
+                Hallo {{ game.name }}!
+            </h1>
 
-    {% endif %}
+        {% endif %}
+    </div>
 
     <div>
-        Rate bitte eine Zahl zwischen 1-100:<br />
+        <label for="form_number">
+            Rate bitte eine Zahl zwischen 1-100:
+        </label>
         <form action="guess" method="POST">
             <input type="hidden" name="game_id" value="{{ game.id }}" />
-            <input type="text" name="guessed_number" pattern="^0*(?:[1-9][0-9]?|100)$" />
+            <input
+                type="text"
+                class="form-control mb-2"
+                name="guessed_number"
+                id="form_number"
+                pattern="^0*(?:[1-9][0-9]?|100)$"
+                placeholder="1 - 100..."
+                autofocus
+            />
+            <input type="submit" class="btn btn-primary" value="Raten" />
         </form>
     </div>
 
