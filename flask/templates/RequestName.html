@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "Base.html" %}
 
-<head>
-    <title>Zahlen Raten: Neues Spiel</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+{% block head %}
 
-<body>
+    <title>Zahlen Raten: Name bitte</title>
 
-    <main>
-        name bitte:
-        <form action="start" method="POST">
-            <input type="text" name="name" />
-        </form>
-    </main>
+{% endblock %}
 
-</body>
-</html>
+{% block body %}
+
+    name bitte:
+    <form action="start" method="POST">
+        <input type="text" name="name" />
+    </form>
+
+{% endblock %}
