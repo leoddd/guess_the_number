@@ -4,6 +4,17 @@ class Game:
         self.name = name
         self.correctGuess = correctGuess
         self.guesses = guesses
+        
+    def is_won(self):
+        if self.guesses == None or len(self.guesses) <= 0:
+            return False
+        else:
+            for guess in self.guesses:
+                if guess.guess == self.correctGuess:
+                    print(guess.guess, self.correctGuess)
+                    return True
+        
+        return False
 
     def __str__(self):
         g = ""

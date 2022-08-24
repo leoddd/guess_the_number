@@ -18,6 +18,9 @@ def game():
 
     if game is None:
         return new_game()
+        
+    if game.is_won():
+        return redirect(url_for('correctGuess', **request.args))
 
     return render_template('Game.html', game = game)
 
@@ -62,6 +65,9 @@ def correctGuess():
     game = database.getGameById(game_id)
     if game is None:
         return new_game()
+        
+    if not game.is_won():
+        return redirect(url_for('game', **request.args))
 
     return render_template(
         'CorrectGuess.html',
