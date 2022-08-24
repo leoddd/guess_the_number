@@ -42,6 +42,33 @@ def getHighestScores(amount):
         games.append(Game(gameId, name, correctGuess, guesses))
 
     return games
+    
+def getUnfinishedGames():
+    cur = con.cursor()
+    sqlite_select_game_with_param = """SELECT ga.id, ga.name, ga.correctGuess from games ga WHERE ga.correctGuess NOT IN (SELECT gu.guess FROM guesses gu WHERE gu.gameId == ga.id)"""
+    cur.execute(sqlite_select_game_with_param)
+    records = cur.fetchall()
+    games = []
+    for game in records:
+        gameId = game[0]
+        name = game[1]
+        correctGuess = game[2]
+
+        sqlite_select_guesses_with_param = """SELECT id, date, guess from guesses WHERE gameId == (?)"""
+        data_tuple = (gameId,)
+        cur.execute(sqlite_select_guesses_with_param, data_tuple)
+        guessRecords = cur.fetchall()
+
+        guesses = []
+        for guess in guessRecords:
+            guessId = guess[0]
+            guessDate = guess[1]
+            guessNumber = guess[2]
+            guesses.append(Guess(guessId, gameId, guessDate, guessNumber))
+
+        games.append(Game(gameId, name, correctGuess, guesses))
+
+    return games
 
 def getGamesOfPlayer(playerName):
     cur = con.cursor()
