@@ -33,8 +33,8 @@
     </div>
 
     <div>
-        <label for="form_number">
-            Rate bitte eine Zahl zwischen 1-100:
+        <label for="form_number" id="form_number_label">
+            Rate bitte eine Zahl von 1 - 100:
         </label>
         <form action="guess" method="POST">
             <input type="hidden" name="game_id" value="{{ game.id }}" />
@@ -43,8 +43,13 @@
                 class="form-control mb-2"
                 name="guessed_number"
                 id="form_number"
+                aria-labelledby="form_number_label"
                 pattern="^0*(?:[1-9][0-9]?|100)$"
                 placeholder="1 - 100..."
+                aria-placeholder="Eine Zahl von 1 bis 100"
+                required="required"
+                aria-required="true"
+                autocomplete="off"
                 autofocus
             />
             <input type="submit" class="btn btn-primary" value="Raten" />
@@ -57,27 +62,27 @@
                 Bisher geratene Zahlen
             </div>
             <div class="card-body p-0">
-                <div class="row mx-0">
+                <div class="row mx-0" role="listbox">
 
-                    <div class="col-6 border-end bg-less-than p-0 pb-2">
+                    <div class="col-6 border-end bg-less-than p-0 pb-2" role="list">
                         <div class="border-bottom mb-2 pt-2" style="background: rgba(0, 0, 0, .05);">
-                            <h3 class="mb-2" style="font-size: 1.1rem;">Zu Klein <</h3>
+                            <h3 class="mb-2" style="font-size: 1.1rem;">Zu Klein &darr;</h3>
                         </div>
                         {% if game.guesses|selectattr("guess", "lt", game.correctGuess)|list|length > 0 %}
                             {% for guess in game.guesses|selectattr("guess", "lt", game.correctGuess)|sort(attribute="guess") %}
-                                {{ guess.guess }}{% if not loop.last %}, {% endif %}
+                                <span role="listitem">{{ guess.guess }}</span>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         {% else %}
                             -
                         {% endif %}
                     </div>
-                    <div class="col-6 bg-greater-than p-0 pb-2">
+                    <div class="col-6 bg-greater-than p-0 pb-2" role="list">
                         <div class="border-bottom mb-2 pt-2" style="background: rgba(0, 0, 0, .05);">
-                            <h3 class="mb-2" style="font-size: 1.1rem;">> Zu Groß</h3>
+                            <h3 class="mb-2" style="font-size: 1.1rem;">&uarr; Zu Groß</h3>
                         </div>
                         {% if game.guesses|selectattr("guess", "gt", game.correctGuess)|list|length > 0 %}
                             {% for guess in game.guesses|selectattr("guess", "gt", game.correctGuess)|sort(attribute="guess") %}
-                                {{ guess.guess }}{% if not loop.last %}, {% endif %}
+                                <span role="listitem">{{ guess.guess }}</span>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         {% else %}
                             -
