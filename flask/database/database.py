@@ -4,7 +4,7 @@ from random import randrange
 from .game import Game
 from .guess import Guess
 
-class Database:
+class Database():
     def __init__(self, clear=False):
         self.con = sqlite3.connect('scores.db', detect_types = sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES, check_same_thread = False)
         cur = self.con.cursor()
