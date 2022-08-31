@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import database
+from database.database import Database
 
 app = Flask(__name__)
-database.init()
+db = Database()
 
 @app.route('/')
 def requestName():
@@ -12,7 +12,7 @@ def requestName():
 def game():
     game_id = request.args.get('game_id', None, int)
 
-    game = database.getGameById(
+    game = db.getGameById(
         game_id
     )
 
@@ -28,14 +28,14 @@ def game():
 def leaderboard():
     return render_template(
         'Leaderboard.html',
-        leaderboard = database.getHighestScores(10)
+        leaderboard = db.getHighestScores(10)
     )
 
 @app.route('/running')
 def runningGames():
     return render_template(
         'RunningGames.html',
-        running_games = database.getUnfinishedGames()
+        running_games = db.getUnfinishedGames()
     )
 
 @app.route('/start', methods = ['POST'])
@@ -44,7 +44,7 @@ def startGame():
     if name is None:
         return new_game()
 
-    game = database.createGame(name)
+    game = db.createGame(name)
     if game is None:
         return new_game()
 
@@ -58,11 +58,11 @@ def makeGuess():
     if game_id is None or guessed_number is None:
         return new_game()
 
-    game = database.getGameById(game_id)
+    game = db.getGameById(game_id)
     if game is None:
         return new_game()
 
-    database.addGuess(game.id, guessed_number)
+    db.addGuess(game.id, guessed_number)
 
     if game.correctGuess != guessed_number:
         return redirect(url_for('game', game_id = game.id))
@@ -76,7 +76,7 @@ def correctGuess():
     if game_id is None:
         return new_game()
 
-    game = database.getGameById(game_id)
+    game = db.getGameById(game_id)
     if game is None:
         return new_game()
 
@@ -86,7 +86,7 @@ def correctGuess():
     return render_template(
         'CorrectGuess.html',
         game = game,
-        leaderboard = database.getHighestScores(10)
+        leaderboard = db.getHighestScores(10)
     )
 
 def new_game():
@@ -94,4 +94,3 @@ def new_game():
 
 if __name__ == '__main__':
     app.run(debug = True, host = '0.0.0.0', port = 80)
-    database.cleanup()
