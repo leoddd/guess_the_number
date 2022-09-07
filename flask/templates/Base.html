@@ -6,6 +6,7 @@
     <title>Zahlen Raten</title>
     {% endblock %}
     <meta charset="utf-8">
+    <meta name="description" content="Zahlen Raten: Browserspiel">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -15,14 +16,12 @@
 </head>
 
 <body>
-    <a href="#main" class="display-none"></a>
-
     <nav class="navbar navbar-light bg-light">
         <div class="container">
             <a href="/" class="text-decoration-none text-reset">
                 <div class="navbar-brand">
                     <span class="navbar-brand-title">Zahlen Raten</span>
-                    <span class="navbar-brand-subtitle text-muted">ITF20a</span>
+                    <span class="navbar-brand-subtitle">ITF20a</span>
                 </div>
             </a>
 
@@ -37,7 +36,7 @@
         </div>
     </nav>
 
-    <main id="main">
+    <main>
         <div class="container my-5">
             {% block body %}
             {% endblock %}
@@ -45,7 +44,7 @@
     </main>
 
     <footer>
-        <div class="bg-light text-center text-muted">
+        <div class="bg-light text-center">
             <div class="container py-2">
                 &copy; Luca Herms, Denis Pazer, Tim Schellenberg, Christoph Schlüter
 
